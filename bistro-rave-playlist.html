@@ -1,33 +1,37 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Charity Bistro Rave — DJ Set</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<title>Charity Bistro Rave — 0328 @thesocialsips</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #F5EFE0;
-    --warm-white: #FAF6EE;
-    --charcoal: #1C1C1C;
-    --gold: #C9A84C;
-    --gold-light: #E8C97A;
-    --terracotta: #C4624A;
-    --sage: #7A9E7E;
-    --muted: #8A8070;
+    --cream: #f5f0e8;
+    --warm-white: #faf7f2;
+    --charcoal: #1a1814;
+    --brown: #3d2b1f;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --rose: #c4756a;
+    --sage: #7a9e7e;
+    --indigo: #3d4f6e;
+    --muted: #8a7d70;
+    --border: rgba(61,43,31,0.12);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--charcoal);
+    background: var(--warm-white);
+    color: var(--charcoal);
     font-family: 'DM Mono', monospace;
-    color: var(--cream);
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  /* Grain overlay */
+  /* Grain texture overlay */
   body::before {
     content: '';
     position: fixed;
@@ -38,30 +42,42 @@
     opacity: 0.6;
   }
 
+  /* HERO */
   .hero {
-    padding: 60px 40px 40px;
     position: relative;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    padding: 80px 40px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    min-height: 70vh;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 20px;
   }
 
   .event-tag {
     font-size: 10px;
-    letter-spacing: 4px;
-    color: var(--gold);
+    letter-spacing: 0.35em;
     text-transform: uppercase;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.1s;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-weight: 400;
   }
 
   .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 6vw, 72px);
-    line-height: 1.05;
-    letter-spacing: -1px;
+    font-size: clamp(52px, 8vw, 96px);
+    line-height: 0.9;
+    font-weight: 700;
+    color: var(--charcoal);
     margin-bottom: 8px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.2s;
   }
 
   .hero-title em {
@@ -70,284 +86,356 @@
   }
 
   .hero-subtitle {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--muted);
-    text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--rose);
     margin-top: 16px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.35s;
+    margin-bottom: 40px;
+    font-weight: 300;
   }
 
   .hero-meta {
     display: flex;
-    gap: 32px;
-    margin-top: 32px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.45s;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .meta-item {
+  .hero-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  .meta-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* Cover art right side */
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cover-art {
+    width: 100%;
+    max-width: 440px;
+    aspect-ratio: 1;
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .cover-art::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(196,117,106,0.2) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 50%, rgba(61,79,110,0.15) 0%, transparent 70%);
+  }
+
+  .cover-inner {
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
   }
 
-  .meta-label {
+  .cover-label {
     font-size: 9px;
-    letter-spacing: 3px;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-
-  .meta-value {
-    font-size: 13px;
-    color: var(--cream);
-    font-weight: 400;
-  }
-
-  .meta-value.gold { color: var(--gold); }
-
-  /* Sections */
-  .sections {
-    padding: 0 40px 60px;
-  }
-
-  .section {
-    margin-top: 48px;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards;
-  }
-
-  .section:nth-child(1) { animation-delay: 0.5s; }
-  .section:nth-child(2) { animation-delay: 0.65s; }
-  .section:nth-child(3) { animation-delay: 0.8s; }
-  .section:nth-child(4) { animation-delay: 0.95s; }
-  .section:nth-child(5) { animation-delay: 1.1s; }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 6px;
-  }
-
-  .section-time {
-    font-size: 9px;
-    letter-spacing: 3px;
+    letter-spacing: 0.4em;
     color: var(--gold);
     text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+
+  .cover-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    line-height: 1.1;
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .cover-main em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .cover-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 20px auto;
+    opacity: 0.6;
+  }
+
+  .cover-date {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: rgba(245,240,232,0.5);
+    text-transform: uppercase;
+  }
+
+  .cover-tracks-count {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(245,240,232,0.35);
+  }
+
+  .cover-vinyl {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15);
+    opacity: 0.3;
+  }
+  .cover-vinyl::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .cover-vinyl::after {
+    content: '';
+    position: absolute;
+    inset: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  /* Spotify button */
+  .spotify-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: transparent;
+    border: 1px solid var(--charcoal);
+    color: var(--charcoal);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 32px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .spotify-btn:hover {
+    background: var(--charcoal);
+    color: var(--cream);
+  }
+
+  .spotify-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* SECTION DIVIDER */
+  .section-header {
+    max-width: 1100px;
+    margin: 60px auto 0;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .section-header-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-header-label {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* TRACKLIST */
+  .tracklist-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 100px;
+  }
+
+  .section-block {
+    margin-top: 48px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    opacity: 0.6;
+    min-width: 24px;
   }
 
   .section-name {
     font-family: 'Playfair Display', serif;
-    font-size: 22px;
+    font-size: 13px;
     font-style: italic;
-    color: var(--cream);
+    color: var(--charcoal);
+    font-weight: 400;
   }
 
   .section-desc {
-    font-size: 10px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
     color: var(--muted);
-    letter-spacing: 1.5px;
-    margin-bottom: 16px;
-    padding-left: 2px;
+    margin-left: auto;
   }
 
-  .track-list {
-    list-style: none;
-    border-top: 1px solid rgba(255,255,255,0.06);
+  .section-color-bar {
+    width: 3px;
+    height: 16px;
+    border-radius: 2px;
+    flex-shrink: 0;
   }
 
+  /* Track rows */
   .track {
     display: grid;
-    grid-template-columns: 28px 1fr auto auto;
+    grid-template-columns: 28px 1fr auto;
     align-items: center;
     gap: 16px;
-    padding: 13px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    transition: background 0.2s;
-    cursor: pointer;
-    position: relative;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(61,43,31,0.06);
+    transition: background 0.15s ease;
+    cursor: default;
   }
 
   .track:hover {
-    background: rgba(201, 168, 76, 0.04);
-    margin: 0 -8px;
-    padding-left: 8px;
-    padding-right: 8px;
+    background: rgba(61,43,31,0.025);
+    margin: 0 -12px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
-
-  .track:hover .track-num { opacity: 0; }
-  .track:hover .play-icon { opacity: 1; }
 
   .track-num {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
+    opacity: 0.5;
     text-align: right;
-    transition: opacity 0.15s;
+    font-weight: 300;
   }
 
-  .play-icon {
-    position: absolute;
-    left: 6px;
-    font-size: 11px;
-    color: var(--gold);
-    opacity: 0;
-    transition: opacity 0.15s;
+  .track-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
   }
-
-  .track-info { overflow: hidden; }
 
   .track-title {
-    font-size: 13px;
-    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--charcoal);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .track-title .star {
-    color: var(--gold);
-    font-size: 10px;
-    flex-shrink: 0;
+    line-height: 1.2;
   }
 
   .track-artist {
     font-size: 10px;
     color: var(--muted);
-    margin-top: 2px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .track-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .track-tag {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    padding: 3px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .tag-jp {
+    background: rgba(61,79,110,0.1);
+    color: var(--indigo);
+    border: 1px solid rgba(61,79,110,0.2);
+  }
+
+  .tag-star {
+    background: rgba(201,168,76,0.12);
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.25);
   }
 
   .track-duration {
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    white-space: nowrap;
-  }
-
-  .track-spotify {
-    width: 22px;
-    height: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .track-spotify a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 15px;
-    transition: color 0.2s;
-    display: flex;
-    align-items: center;
-  }
-
-  .track-spotify a:hover { color: #1DB954; }
-
-  .spotify-logo {
-    width: 16px;
-    height: 16px;
-    fill: currentColor;
-  }
-
-  /* Total bar */
-  .total-bar {
-    margin: 48px 40px 0;
-    padding: 20px 0;
-    border-top: 1px solid rgba(201, 168, 76, 0.3);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards 1.3s;
-  }
-
-  .total-label {
-    font-size: 9px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .total-count {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    color: var(--gold);
-  }
-
-  .total-count span {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    margin-left: 8px;
-  }
-
-  /* Charity note */
-  .charity-note {
-    margin: 0 40px;
-    padding: 20px 24px;
-    border: 1px solid rgba(201, 168, 76, 0.2);
-    background: rgba(201, 168, 76, 0.04);
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards 1.4s;
-  }
-
-  .charity-icon {
-    font-size: 18px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .charity-text {
     font-size: 10px;
     color: var(--muted);
-    line-height: 1.7;
-    letter-spacing: 0.5px;
+    opacity: 0.6;
+    min-width: 36px;
+    text-align: right;
   }
 
-  .charity-text strong {
-    color: var(--gold-light);
-    display: block;
-    margin-bottom: 4px;
-    letter-spacing: 2px;
-    font-size: 9px;
-    text-transform: uppercase;
-  }
-
-  /* Progress bar viz */
+  /* Timeline bar */
   .timeline {
-    margin: 0 40px 0;
-    padding: 32px 0 0;
-    opacity: 0;
-    animation: fadeUp 0.5s ease forwards 1.25s;
-  }
-
-  .timeline-label {
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
   }
 
   .timeline-bar {
     height: 4px;
-    background: rgba(255,255,255,0.06);
     border-radius: 2px;
-    overflow: hidden;
+    background: var(--border);
     display: flex;
+    overflow: hidden;
+    margin-bottom: 8px;
   }
 
   .timeline-seg {
@@ -355,417 +443,453 @@
     transition: opacity 0.2s;
   }
 
-  .seg-opening { background: var(--sage); width: 16.7%; }
-  .seg-build { background: var(--gold); width: 22.2%; }
-  .seg-peak { background: var(--terracotta); width: 33.3%; }
-  .seg-closing { background: var(--gold-light); width: 16.7%; }
-  .seg-reserve { background: rgba(255,255,255,0.15); width: 11.1%; }
+  .timeline-seg:hover { opacity: 0.8; }
 
-  .timeline-legend {
+  .timeline-labels {
     display: flex;
-    gap: 20px;
-    margin-top: 10px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    opacity: 0.6;
   }
 
-  .legend-item {
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 40px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: space-between;
+  }
+
+  .footer-left {
     font-size: 9px;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.2em;
     color: var(--muted);
-    text-transform: uppercase;
+    opacity: 0.6;
   }
 
-  .legend-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
+  .footer-right {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--muted);
   }
 
+  /* Animations */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @media (max-width: 600px) {
-    .hero, .sections, .total-bar, .charity-note, .timeline { padding-left: 20px; padding-right: 20px; }
-    .sections { padding-left: 20px; padding-right: 20px; }
-    .hero-meta { gap: 20px; flex-wrap: wrap; }
+  .hero-left { animation: fadeUp 0.8s ease both; }
+  .hero-right { animation: fadeUp 0.8s 0.15s ease both; }
+  .section-block { animation: fadeUp 0.5s ease both; }
+  .section-block:nth-child(1) { animation-delay: 0.2s; }
+  .section-block:nth-child(2) { animation-delay: 0.3s; }
+  .section-block:nth-child(3) { animation-delay: 0.4s; }
+  .section-block:nth-child(4) { animation-delay: 0.5s; }
+
+  @media (max-width: 768px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 50px 24px 40px;
+      min-height: auto;
+      gap: 40px;
+    }
+    .hero-right { order: -1; }
+    .cover-art { max-width: 300px; margin: 0 auto; }
+    .tracklist-container { padding: 0 24px 60px; }
+    .timeline { padding: 0 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    .section-header { padding: 0 24px; }
   }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="event-tag">DJ Set · 90 min playlist</div>
-  <h1 class="hero-title">Charity<br><em>Bistro Rave</em></h1>
-  <div class="hero-subtitle">French House · Tropical · International Pop · 2000s–2016</div>
-  <div class="hero-meta">
-    <div class="meta-item">
-      <span class="meta-label">Date</span>
-      <span class="meta-value">3/28 SAT</span>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="event-tag">Curated DJ Set · Ticketed Charity Event</p>
+    <h1 class="hero-title">Charity<br><em>Bistro</em><br>Rave</h1>
+    <p class="hero-subtitle">An afternoon of French house, deep groove & Asian underground</p>
+    <div class="hero-meta">
+      <div class="hero-meta-row">
+        <span class="meta-dot"></span>
+        <span>SATURDAY, MARCH 28, 2026 · 13:00–16:00</span>
+      </div>
+      <div class="hero-meta-row">
+        <span class="meta-dot"></span>
+        <span>@THESOCIALSIPS</span>
+      </div>
+      <div class="hero-meta-row">
+        <span class="meta-dot"></span>
+        <span>23 TRACKS · 1 HR 45 MIN · PROCEEDS TO CHARITY</span>
+      </div>
     </div>
-    <div class="meta-item">
-      <span class="meta-label">Time</span>
-      <span class="meta-value">13:00–16:00</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Venue</span>
-      <span class="meta-value">@thesocialsips</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Set Length</span>
-      <span class="meta-value gold">~90 min</span>
-    </div>
-  </div>
-</div>
-
-<div class="sections">
-
-  <!-- Section 1 -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-time">0:00–15:00</span>
-      <span class="section-name">Ouverture</span>
-    </div>
-    <div class="section-desc">慵懶進場 · 像走進巴黎小酒館</div>
-    <ul class="track-list">
-      <li class="track">
-        <span class="track-num">1</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Canopée</div>
-          <div class="track-artist">Polo & Pan</div>
-        </div>
-        <span class="track-duration">4:10</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Polo%20Pan%20Canopée" target="_blank" title="在 Spotify 搜尋">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">2</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">La Ritournelle</div>
-          <div class="track-artist">Sébastien Tellier</div>
-        </div>
-        <span class="track-duration">7:38</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Sébastien%20Tellier%20La%20Ritournelle" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">3</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Am I Wrong</div>
-          <div class="track-artist">Etienne de Crécy</div>
-        </div>
-        <span class="track-duration">3:20</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Etienne%20de%20Crecy%20Am%20I%20Wrong" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-    </ul>
+    <a href="https://open.spotify.com/playlist/41lFObbN6K2uMbgqzkGi4V" target="_blank" class="spotify-btn">
+      <svg class="spotify-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+      </svg>
+      Open on Spotify
+    </a>
   </div>
 
-  <!-- Section 2 -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-time">15:00–35:00</span>
-      <span class="section-name">French House</span>
+  <div class="hero-right">
+    <div class="cover-art">
+      <div class="cover-vinyl"></div>
+      <div class="cover-inner">
+        <p class="cover-label">90 Min Playlist</p>
+        <h2 class="cover-main">Charity<br><em>Bistro Rave</em></h2>
+        <div class="cover-divider"></div>
+        <p class="cover-date">0328 · @thesocialsips</p>
+      </div>
+      <span class="cover-tracks-count">23 TRACKS</span>
     </div>
-    <div class="section-desc">節奏加溫 · 法式 house 靈魂登場</div>
-    <ul class="track-list">
-      <li class="track">
-        <span class="track-num">4</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Music Sounds Better with You <span class="star">✦</span></div>
-          <div class="track-artist">Stardust</div>
-        </div>
-        <span class="track-duration">3:58</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Stardust%20Music%20Sounds%20Better%20with%20You" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">5</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Lady (Hear Me Tonight)</div>
-          <div class="track-artist">Modjo</div>
-        </div>
-        <span class="track-duration">3:54</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Modjo%20Lady%20Hear%20Me%20Tonight" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">6</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Feelings for You</div>
-          <div class="track-artist">Cassius</div>
-        </div>
-        <span class="track-duration">5:10</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Cassius%20Feelings%20for%20You" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">7</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Love Generation</div>
-          <div class="track-artist">Bob Sinclar ft. Gary Pine</div>
-        </div>
-        <span class="track-duration">4:02</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Bob%20Sinclar%20Love%20Generation" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-    </ul>
   </div>
-
-  <!-- Section 3 -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-time">35:00–62:00</span>
-      <span class="section-name">Peak Party</span>
-    </div>
-    <div class="section-desc">能量全開 · Tropical & International Pop</div>
-    <ul class="track-list">
-      <li class="track">
-        <span class="track-num">8</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">This Girl <span class="star">✦</span></div>
-          <div class="track-artist">Kungs vs Cookin' on 3 Burners</div>
-        </div>
-        <span class="track-duration">3:09</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Kungs%20This%20Girl" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">9</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Alors on Danse</div>
-          <div class="track-artist">Stromae</div>
-        </div>
-        <span class="track-duration">3:37</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Stromae%20Alors%20on%20Danse" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">10</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Be Mine</div>
-          <div class="track-artist">Ofenbach ft. Norma Jean Martine</div>
-        </div>
-        <span class="track-duration">3:22</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Ofenbach%20Be%20Mine" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">11</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Levitating (Purple Disco Machine Remix)</div>
-          <div class="track-artist">Dua Lipa</div>
-        </div>
-        <span class="track-duration">5:13</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Dua%20Lipa%20Levitating%20Purple%20Disco%20Machine%20Remix" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">12</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Digital Love</div>
-          <div class="track-artist">Daft Punk</div>
-        </div>
-        <span class="track-duration">4:58</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Daft%20Punk%20Digital%20Love" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Section 4 -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-time">62:00–78:00</span>
-      <span class="section-name">Descente</span>
-    </div>
-    <div class="section-desc">溫柔收尾 · 帶走好心情</div>
-    <ul class="track-list">
-      <li class="track">
-        <span class="track-num">13</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Overnight</div>
-          <div class="track-artist">Parcels</div>
-        </div>
-        <span class="track-duration">3:44</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Parcels%20Overnight" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">14</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Something About Us <span class="star">✦</span></div>
-          <div class="track-artist">Daft Punk</div>
-        </div>
-        <span class="track-duration">4:08</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Daft%20Punk%20Something%20About%20Us" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Section 5: Reserve -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-time">備用 · +30 min</span>
-      <span class="section-name">Réserve</span>
-    </div>
-    <div class="section-desc">現場氣氛好就繼續放 · 保留彈性</div>
-    <ul class="track-list">
-      <li class="track">
-        <span class="track-num">R1</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Hello</div>
-          <div class="track-artist">Martin Solveig ft. Dragonette</div>
-        </div>
-        <span class="track-duration">3:44</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Martin%20Solveig%20Hello" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">R2</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Zoom Zoom</div>
-          <div class="track-artist">Polo & Pan</div>
-        </div>
-        <span class="track-duration">3:50</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Polo%20Pan%20Zoom%20Zoom" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">R3</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Lucky Star</div>
-          <div class="track-artist">Superfunk ft. Ron Carroll</div>
-        </div>
-        <span class="track-duration">4:20</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Superfunk%20Lucky%20Star%20Ron%20Carroll" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">R4</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Sunset Lover</div>
-          <div class="track-artist">Petit Biscuit</div>
-        </div>
-        <span class="track-duration">3:52</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Petit%20Biscuit%20Sunset%20Lover" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">R5</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Tilted</div>
-          <div class="track-artist">Christine and the Queens</div>
-        </div>
-        <span class="track-duration">3:37</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Christine%20and%20the%20Queens%20Tilted" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">R6</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">All I Need</div>
-          <div class="track-artist">Air</div>
-        </div>
-        <span class="track-duration">4:20</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Air%20All%20I%20Need" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-      <li class="track">
-        <span class="track-num">R7</span>
-        <span class="play-icon">▶</span>
-        <div class="track-info">
-          <div class="track-title">Padam Padam (Club Mix)</div>
-          <div class="track-artist">Kylie Minogue</div>
-        </div>
-        <span class="track-duration">3:32</span>
-        <div class="track-spotify"><a href="https://open.spotify.com/search/Kylie%20Minogue%20Padam%20Padam" target="_blank">
-          <svg class="spotify-logo" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </a></div>
-      </li>
-    </ul>
-  </div>
-
-</div>
+</section>
 
 <!-- Timeline -->
-<div class="timeline" style="margin: 0 40px;">
-  <div class="timeline-label">Set Arc</div>
+<div class="timeline">
   <div class="timeline-bar">
-    <div class="timeline-seg seg-opening"></div>
-    <div class="timeline-seg seg-build"></div>
-    <div class="timeline-seg seg-peak"></div>
-    <div class="timeline-seg seg-closing"></div>
-    <div class="timeline-seg seg-reserve"></div>
+    <!-- Opening 3 tracks ~16min / 105min total -->
+    <div class="timeline-seg" style="width:15.2%; background:#c9a84c;" title="Ouverture"></div>
+    <!-- Build 5 tracks ~20min -->
+    <div class="timeline-seg" style="width:19.0%; background:#c4756a;" title="French House"></div>
+    <!-- Peak 10 tracks ~50min -->
+    <div class="timeline-seg" style="width:47.6%; background:#3d4f6e;" title="Deep & Groove"></div>
+    <!-- Closing 5 tracks ~23min -->
+    <div class="timeline-seg" style="width:18.2%; background:#7a9e7e;" title="Asia Nuit"></div>
   </div>
-  <div class="timeline-legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#7A9E7E"></div>Ouverture</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#C9A84C"></div>French House</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#C4624A"></div>Peak</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#E8C97A"></div>Descente</div>
-    <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.3)"></div>Réserve</div>
+  <div class="timeline-labels">
+    <span>Ouverture</span>
+    <span>French House</span>
+    <span>Deep &amp; Groove</span>
+    <span>Asia Nuit</span>
   </div>
 </div>
 
-<!-- Total -->
-<div class="total-bar">
-  <span class="total-label">Total Tracks</span>
-  <div class="total-count">21 <span>tracks · ~90 min</span></div>
+<!-- Section header -->
+<div class="section-header">
+  <div class="section-header-line"></div>
+  <span class="section-header-label">Full Tracklist</span>
+  <div class="section-header-line"></div>
 </div>
 
-<!-- Charity -->
-<div class="charity-note" style="margin-bottom: 60px; margin-top: 16px;">
-  <div class="charity-icon">♡</div>
-  <div class="charity-text">
-    <strong>Charity Initiative</strong>
-    活動以售票形式舉辦，扣除場地與食材成本後，所有利潤將捐給偏鄉兒童教育或食物銀行。Paris in Taipei — for a good cause.
+<!-- TRACKLIST -->
+<div class="tracklist-container">
+
+  <!-- OPENING -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-color-bar" style="background:#c9a84c;"></div>
+      <span class="section-num">I</span>
+      <span class="section-name">Ouverture</span>
+      <span class="section-desc">Parisian bistro · 3 tracks</span>
+    </div>
+
+    <div class="track">
+      <span class="track-num">01</span>
+      <div class="track-info">
+        <span class="track-title">Canopée</span>
+        <span class="track-artist">Polo &amp; Pan</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">4:36</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">02</span>
+      <div class="track-info">
+        <span class="track-title">La ritournelle</span>
+        <span class="track-artist">Sébastien Tellier</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">7:34</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">03</span>
+      <div class="track-info">
+        <span class="track-title">Am I Wrong</span>
+        <span class="track-artist">Etienne de Crécy</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">3:51</span>
+      </div>
+    </div>
   </div>
+
+  <!-- BUILD -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-color-bar" style="background:#c4756a;"></div>
+      <span class="section-num">II</span>
+      <span class="section-name">French House</span>
+      <span class="section-desc">Filtered &amp; funky · 5 tracks</span>
+    </div>
+
+    <div class="track">
+      <span class="track-num">04</span>
+      <div class="track-info">
+        <span class="track-title">Music Sounds Better With You</span>
+        <span class="track-artist">Stardust, Benjamin Diamond, Alan Braxe, Thomas Bangalter</span>
+      </div>
+      <div class="track-right">
+        <span class="track-tag tag-star">★</span>
+        <span class="track-duration">6:43</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">05</span>
+      <div class="track-info">
+        <span class="track-title">Lady — Acoustic Version</span>
+        <span class="track-artist">Modjo</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">3:15</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">06</span>
+      <div class="track-info">
+        <span class="track-title">Feeling For You</span>
+        <span class="track-artist">Cassius</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">4:37</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">07</span>
+      <div class="track-info">
+        <span class="track-title">This Girl (Kungs vs. Cookin' On 3 Burners)</span>
+        <span class="track-artist">Kungs, Cookin' On 3 Burners</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">3:15</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">08</span>
+      <div class="track-info">
+        <span class="track-title">Be Mine</span>
+        <span class="track-artist">Ofenbach</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">2:41</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PEAK -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-color-bar" style="background:#3d4f6e;"></div>
+      <span class="section-num">III</span>
+      <span class="section-name">Deep &amp; Groove</span>
+      <span class="section-desc">J-groove &amp; deep house · 10 tracks</span>
+    </div>
+
+    <div class="track">
+      <span class="track-num">09</span>
+      <div class="track-info">
+        <span class="track-title">LIFE — Retune</span>
+        <span class="track-artist">Mondo Grosso, bird</span>
+      </div>
+      <div class="track-right">
+        <span class="track-tag tag-jp">JP</span>
+        <span class="track-duration">6:12</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">10</span>
+      <div class="track-info">
+        <span class="track-title">Digital Love</span>
+        <span class="track-artist">Daft Punk</span>
+      </div>
+      <div class="track-right">
+        <span class="track-tag tag-star">★</span>
+        <span class="track-duration">5:01</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">11</span>
+      <div class="track-info">
+        <span class="track-title">Overnight</span>
+        <span class="track-artist">Parcels</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">3:39</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">12</span>
+      <div class="track-info">
+        <span class="track-title">Zoom Zoom</span>
+        <span class="track-artist">Polo &amp; Pan</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">3:29</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">13</span>
+      <div class="track-info">
+        <span class="track-title">Lucky Star — Kolombo 303 Dub</span>
+        <span class="track-artist">Superfunk, Ron Carroll, Kolombo</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">5:43</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">14</span>
+      <div class="track-info">
+        <span class="track-title">Tilted</span>
+        <span class="track-artist">Christine and the Queens</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">3:53</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">15</span>
+      <div class="track-info">
+        <span class="track-title">Slowdown</span>
+        <span class="track-artist">Kuniyuki, Sauce81, 寺田創一</span>
+      </div>
+      <div class="track-right">
+        <span class="track-tag tag-jp">JP</span>
+        <span class="track-duration">4:28</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">16</span>
+      <div class="track-info">
+        <span class="track-title">Changed</span>
+        <span class="track-artist">Hip Dozer, Gildas</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">3:50</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">17</span>
+      <div class="track-info">
+        <span class="track-title">Move</span>
+        <span class="track-artist">Adam Port, Stryv, Keinemusik, Orso, Malachiii</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">2:57</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">18</span>
+      <div class="track-info">
+        <span class="track-title">It's Real</span>
+        <span class="track-artist">Kid Sublime</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">6:20</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="section-block">
+    <div class="section-label">
+      <div class="section-color-bar" style="background:#7a9e7e;"></div>
+      <span class="section-num">IV</span>
+      <span class="section-name">Asia Nuit</span>
+      <span class="section-desc">Asian underground finish · 5 tracks</span>
+    </div>
+
+    <div class="track">
+      <span class="track-num">19</span>
+      <div class="track-info">
+        <span class="track-title">湾岸</span>
+        <span class="track-artist">Summer Eye</span>
+      </div>
+      <div class="track-right">
+        <span class="track-tag tag-jp">JP</span>
+        <span class="track-duration">6:08</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">20</span>
+      <div class="track-info">
+        <span class="track-title">Ｆｅｅｌ Ｉｔ （Ｌｏｎｇ Ｅｄｉｔ）</span>
+        <span class="track-artist">PUSHIM</span>
+      </div>
+      <div class="track-right">
+        <span class="track-tag tag-jp">JP</span>
+        <span class="track-duration">5:53</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">21</span>
+      <div class="track-info">
+        <span class="track-title">She Ready — Extended Mix</span>
+        <span class="track-artist">vampoleez, 李丁丁</span>
+      </div>
+      <div class="track-right">
+        <span class="track-duration">4:39</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">22</span>
+      <div class="track-info">
+        <span class="track-title">CAKE</span>
+        <span class="track-artist">iri</span>
+      </div>
+      <div class="track-right">
+        <span class="track-tag tag-jp">JP</span>
+        <span class="track-duration">3:34</span>
+      </div>
+    </div>
+
+    <div class="track">
+      <span class="track-num">23</span>
+      <div class="track-info">
+        <span class="track-title">zaljum 水 — 日出版</span>
+        <span class="track-artist">Ń7ä, 阿爆（阿仍仍）, R.fu</span>
+      </div>
+      <div class="track-right">
+        <span class="track-tag tag-star">★</span>
+        <span class="track-duration">3:06</span>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+<footer>
+  <span class="footer-left">© 2026 · CHARITY BISTRO RAVE · @THESOCIALSIPS</span>
+  <span class="footer-right">Good music for good cause</span>
+</footer>
 
 </body>
 </html>
